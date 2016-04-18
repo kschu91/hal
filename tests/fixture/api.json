@@ -1,0 +1,19 @@
+{
+    "description": "cool API",
+    "_links": {
+        "self": {
+            "href": "/api"
+        },
+        "posts": [
+            {
+                "href": "/api/posts/1"
+            },
+            {
+                "href": "/api/posts/2"
+            }
+        ],
+        "administrator": {
+            "href": "/api/users/kevin"
+        }
+    }
+}

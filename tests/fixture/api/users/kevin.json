@@ -1,0 +1,8 @@
+{
+    "name": "Kevin Schu",
+    "_links": {
+        "company": {
+            "href": "/api//companies/aoe.json"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "name": "aeq/hal",
+    "authors": [
+        {
+            "name": "Kevin Schu",
+            "email": "kevin.schu@aoe.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2",
+        "ql/uri-template": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aeq\\Hal\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aeq\\Hal\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.5"
+    }
+}

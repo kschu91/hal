@@ -1,0 +1,12 @@
+{
+    "id": 2,
+    "name": "extremely awesome!",
+    "_links": {
+        "self": {
+            "href": "/api/posts/2"
+        },
+        "publisher": {
+            "href": "api/users/kevin"
+        }
+    }
+}
