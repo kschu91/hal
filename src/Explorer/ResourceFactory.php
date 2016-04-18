@@ -63,7 +63,7 @@ class ResourceFactory
     {
         $parsed = [];
         foreach ($embedded as $name => $embed) {
-            $parsed[] = self::create($explorer, $embed);
+            $parsed[$name] = self::create($explorer, $embed);
         }
         return $parsed;
     }
