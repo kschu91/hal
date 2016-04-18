@@ -62,7 +62,7 @@ class ResourceFactory
     private static function parseEmbedded(Explorer $explorer, array $embedded)
     {
         $parsed = [];
-        foreach ($embedded as $embed) {
+        foreach ($embedded as $name => $embed) {
             $parsed[] = self::create($explorer, $embed);
         }
         return $parsed;
