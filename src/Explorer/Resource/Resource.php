@@ -3,7 +3,6 @@ namespace Aeq\Hal\Explorer\Resource;
 
 use Aeq\Hal\Exception\NotFoundException;
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\DataGettableInterface;
 use Aeq\Hal\Explorer\EmbeddableInterface;
 use Aeq\Hal\Explorer\Link\Link;
 use Aeq\Hal\Explorer\Link\LinkCollection;
@@ -27,7 +26,7 @@ class Resource implements ResourceInterface, EmbeddableInterface
     private $links = [];
 
     /**
-     * @var DataGettableInterface[]
+     * @var ResourceInterface[]
      */
     private $embedded = [];
 
