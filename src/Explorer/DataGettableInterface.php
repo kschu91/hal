@@ -1,7 +1,7 @@
 <?php
 namespace Aeq\Hal\Explorer;
 
-interface ResourceableInterface
+interface DataGettableInterface
 {
     /**
      * @return array

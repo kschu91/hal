@@ -1,8 +1,10 @@
 <?php
-namespace Aeq\Hal\Explorer;
+namespace Aeq\Hal\Explorer\Resource;
 
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\Resource as HalResource;
+use Aeq\Hal\Explorer\EmbeddableInterface;
+use Aeq\Hal\Explorer\Link\LinkFactory;
+use Aeq\Hal\Explorer\Resource\Resource as HalResource;
 use Aeq\Hal\Utils\ArrayUtils;
 
 class ResourceFactory
@@ -27,17 +29,17 @@ class ResourceFactory
      */
     private static function createCollection(Explorer $explorer, array $data)
     {
-        $collection = [];
+        $collection = new ResourceCollection($explorer);
         foreach ($data as $itemData) {
-            $collection[] = self::create($explorer, $itemData);
+            $collection->addResource(self::create($explorer, $itemData));
         }
-        return new ResourceCollection($explorer, $collection);
+        return $collection;
     }
 
     /**
      * @param Explorer $explorer
      * @param array $data
-     * @return ResourceCollection
+     * @return HalResource
      */
     private static function createResource(Explorer $explorer, array $data)
     {
@@ -46,39 +48,35 @@ class ResourceFactory
 
         unset($data['_links'], $data['_embedded']);
 
-        return new Resource(
-            $explorer,
-            $data,
-            self::parseLinks($explorer, $links),
-            self::parseEmbedded($explorer, $embedded)
-        );
+        $resource = new Resource($explorer, $data);
+
+        self::parseEmbedded($explorer, $resource, $embedded);
+        self::parseLinks($explorer, $resource, $links);
+
+        return $resource;
     }
 
     /**
      * @param Explorer $explorer
+     * @param EmbeddableInterface $resource
      * @param array $embedded
-     * @return array
      */
-    private static function parseEmbedded(Explorer $explorer, array $embedded)
+    private static function parseEmbedded(Explorer $explorer, EmbeddableInterface $resource, array $embedded)
     {
-        $parsed = [];
         foreach ($embedded as $name => $embed) {
-            $parsed[$name] = self::create($explorer, $embed);
+            $resource->addEmbedded($name, self::create($explorer, $embed));
         }
-        return $parsed;
     }
 
     /**
      * @param Explorer $explorer
+     * @param HalResource $resource
      * @param array $links
-     * @return array
      */
-    private static function parseLinks(Explorer $explorer, array $links)
+    private static function parseLinks(Explorer $explorer, HalResource $resource, array $links)
     {
-        $parsed = [];
         foreach ($links as $name => $link) {
-            $parsed[$name] = LinkFactory::create($explorer, $name, $link);
+            $resource->addLink($name, LinkFactory::create($explorer, $name, $link, $resource));
         }
-        return $parsed;
     }
 }

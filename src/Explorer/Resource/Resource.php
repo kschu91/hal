@@ -1,11 +1,15 @@
 <?php
-namespace Aeq\Hal\Explorer;
+namespace Aeq\Hal\Explorer\Resource;
 
 use Aeq\Hal\Exception\NotFoundException;
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\Resource as HalResource;
+use Aeq\Hal\Explorer\DataGettableInterface;
+use Aeq\Hal\Explorer\EmbeddableInterface;
+use Aeq\Hal\Explorer\Link\Link;
+use Aeq\Hal\Explorer\Link\LinkCollection;
+use Aeq\Hal\Explorer\Link\LinkInterface;
 
-class Resource implements ResourceableInterface
+class Resource implements ResourceInterface, EmbeddableInterface
 {
     /**
      * @var Explorer
@@ -18,32 +22,28 @@ class Resource implements ResourceableInterface
     private $properties;
 
     /**
-     * @var array
+     * @var LinkInterface[]
      */
-    private $links;
+    private $links = [];
 
     /**
-     * @var array<ResourceableInterface>
+     * @var DataGettableInterface[]
      */
-    private $embedded;
+    private $embedded = [];
 
     /**
      * @param Explorer $explorer
      * @param array $properties
-     * @param array $links
-     * @param array $embedded
      */
-    public function __construct(Explorer $explorer, array $properties, array $links = [], array $embedded = [])
+    public function __construct(Explorer $explorer, array $properties)
     {
         $this->explorer = $explorer;
         $this->properties = $properties;
-        $this->links = $links;
-        $this->embedded = $embedded;
     }
 
     /**
      * @param string $name
-     * @return Link|LinkCollection
+     * @return \Aeq\Hal\Explorer\Link\Link|\Aeq\Hal\Explorer\Link\LinkCollection
      * @throws NotFoundException
      */
     public function getLink($name)
@@ -51,10 +51,16 @@ class Resource implements ResourceableInterface
         if (!$this->hasLink($name)) {
             throw new NotFoundException(sprintf('link "%s" not found', $name), 1460663568);
         }
-        /** @var AbstractLink $link */
-        $link = $this->links[$name];
-        $link->setParent($this);
-        return $link;
+        return $this->links[$name];
+    }
+
+    /**
+     * @param string $name
+     * @param LinkInterface $link
+     */
+    public function addLink($name, LinkInterface $link)
+    {
+        $this->links[$name] = $link;
     }
 
     /**
@@ -68,16 +74,16 @@ class Resource implements ResourceableInterface
 
     /**
      * @param string $name
-     * @param ResourceableInterface $resource
+     * @param ResourceInterface $resource
      */
-    public function addEmbedded($name, ResourceableInterface $resource)
+    public function addEmbedded($name, ResourceInterface $resource)
     {
         $this->embedded[$name] = $resource;
     }
 
     /**
      * @param string $name
-     * @return HalResource|ResourceCollection
+     * @return ResourceInterface
      * @throws NotFoundException
      */
     public function getEmbedded($name)
@@ -104,12 +110,10 @@ class Resource implements ResourceableInterface
     {
         $data = [];
         foreach ($this->embedded as $name => $resource) {
-            /** @var ResourceableInterface $resource */
             $data['_embedded'][$name] = $resource->getData();
         }
         foreach ($this->links as $name => $link) {
-            /** @var ResourceableInterface $resource */
-            $data['_links'][$name] = $link;
+            $data['_links'][$name] = $link->getData();
         }
         return array_merge($this->properties, $data);
     }

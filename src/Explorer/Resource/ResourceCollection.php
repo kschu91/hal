@@ -1,13 +1,13 @@
 <?php
-namespace Aeq\Hal\Explorer;
+namespace Aeq\Hal\Explorer\Resource;
 
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\Resource as HalResource;
+use Aeq\Hal\Explorer\Resource\Resource as HalResource;
 
-class ResourceCollection implements \Iterator, ResourceableInterface
+class ResourceCollection implements \Iterator, ResourceInterface
 {
     /**
-     * @var array<HalResource>
+     * @var ResourceInterface[]
      */
     private $resources = [];
 
@@ -18,12 +18,18 @@ class ResourceCollection implements \Iterator, ResourceableInterface
 
     /**
      * @param Explorer $explorer
-     * @param array<HalResource> $resources
      */
-    public function __construct(Explorer $explorer, array $resources)
+    public function __construct(Explorer $explorer)
     {
         $this->explorer = $explorer;
-        $this->resources = $resources;
+    }
+
+    /**
+     * @param ResourceInterface $resource
+     */
+    public function addResource(ResourceInterface $resource)
+    {
+        $this->resources[] = $resource;
     }
 
     /**
@@ -73,7 +79,6 @@ class ResourceCollection implements \Iterator, ResourceableInterface
     {
         $data = [];
         foreach ($this->resources as $item) {
-            /** @var HalResource $item */
             $data[] = $item->getData();
         }
         return $data;
