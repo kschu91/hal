@@ -3,7 +3,7 @@ namespace Aeq\Hal;
 
 use Aeq\Hal\Client\UnitTestClientAdapter;
 use Aeq\Hal\Serializer\JsonSerializer;
-use Aeq\Hal\Explorer\Resource\Resource as HalResource;
+use Aeq\Hal\Explorer\Resource as HalResource;
 
 class ExplorerTest extends \PHPUnit_Framework_TestCase
 {

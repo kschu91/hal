@@ -1,11 +1,9 @@
 <?php
-namespace Aeq\Hal\Explorer\Link;
+namespace Aeq\Hal\Explorer;
 
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\EmbeddableInterface;
-use Aeq\Hal\Explorer\Resource\Resource as HalResource;
+use Aeq\Hal\Explorer\Resource as HalResource;
 use Aeq\Hal\Exception\AlreadyEmbeddedException;
-use Aeq\Hal\Explorer\Resource\ResourceCollection;
 
 class Link implements LinkInterface
 {
@@ -83,7 +81,7 @@ class Link implements LinkInterface
      * @param string $uri
      * @param array $variables
      * @param array $options
-     * @return HalResource|ResourceCollection
+     * @return HalResource|\Aeq\Hal\Explorer\ResourceCollection
      */
     protected function request($method, $uri, array $variables = [], array $options = [])
     {

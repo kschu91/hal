@@ -1,8 +1,7 @@
 <?php
-namespace Aeq\Hal\Explorer\Link;
+namespace Aeq\Hal\Explorer;
 
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\EmbeddableInterface;
 use Aeq\Hal\Utils\ArrayUtils;
 
 class LinkFactory

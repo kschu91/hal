@@ -1,11 +1,8 @@
 <?php
-namespace Aeq\Hal\Explorer\Link;
+namespace Aeq\Hal\Explorer;
 
 use Aeq\Hal\Exception\AlreadyEmbeddedException;
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\EmbeddableInterface;
-use Aeq\Hal\Explorer\Resource\ResourceCollection;
-use Aeq\Hal\Explorer\Resource\ResourceInterface;
 
 class LinkCollection implements \Iterator, LinkInterface, EmbeddableInterface
 {
@@ -109,7 +106,7 @@ class LinkCollection implements \Iterator, LinkInterface, EmbeddableInterface
 
     /**
      * @param string $name
-     * @param ResourceInterface $resource
+     * @param \Aeq\Hal\Explorer\ResourceInterface $resource
      */
     public function addEmbedded($name, ResourceInterface $resource)
     {

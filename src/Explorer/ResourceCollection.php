@@ -1,8 +1,8 @@
 <?php
-namespace Aeq\Hal\Explorer\Resource;
+namespace Aeq\Hal\Explorer;
 
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\Resource\Resource as HalResource;
+use Aeq\Hal\Explorer\Resource as HalResource;
 
 class ResourceCollection implements \Iterator, ResourceInterface
 {

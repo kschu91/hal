@@ -1,8 +1,6 @@
 <?php
 namespace Aeq\Hal\Explorer;
 
-use Aeq\Hal\Explorer\Resource\ResourceInterface;
-
 interface EmbeddableInterface
 {
     /**

@@ -1,10 +1,8 @@
 <?php
-namespace Aeq\Hal\Explorer\Resource;
+namespace Aeq\Hal\Explorer;
 
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\EmbeddableInterface;
-use Aeq\Hal\Explorer\Link\LinkFactory;
-use Aeq\Hal\Explorer\Resource\Resource as HalResource;
+use Aeq\Hal\Explorer\Resource as HalResource;
 use Aeq\Hal\Utils\ArrayUtils;
 
 class ResourceFactory

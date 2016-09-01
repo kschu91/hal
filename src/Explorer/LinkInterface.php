@@ -1,7 +1,5 @@
 <?php
-namespace Aeq\Hal\Explorer\Link;
-
-use Aeq\Hal\Explorer\DataGettableInterface;
+namespace Aeq\Hal\Explorer;
 
 interface LinkInterface extends DataGettableInterface
 {

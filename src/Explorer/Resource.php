@@ -1,12 +1,8 @@
 <?php
-namespace Aeq\Hal\Explorer\Resource;
+namespace Aeq\Hal\Explorer;
 
 use Aeq\Hal\Exception\NotFoundException;
 use Aeq\Hal\Explorer;
-use Aeq\Hal\Explorer\EmbeddableInterface;
-use Aeq\Hal\Explorer\Link\Link;
-use Aeq\Hal\Explorer\Link\LinkCollection;
-use Aeq\Hal\Explorer\Link\LinkInterface;
 
 class Resource implements ResourceInterface, EmbeddableInterface
 {
@@ -42,7 +38,7 @@ class Resource implements ResourceInterface, EmbeddableInterface
 
     /**
      * @param string $name
-     * @return \Aeq\Hal\Explorer\Link\Link|\Aeq\Hal\Explorer\Link\LinkCollection
+     * @return \Aeq\Hal\Explorer\Link|\Aeq\Hal\Explorer\LinkCollection
      * @throws NotFoundException
      */
     public function getLink($name)
