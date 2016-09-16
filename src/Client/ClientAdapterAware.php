@@ -3,6 +3,7 @@ namespace Aeq\Hal\Client;
 
 use Aeq\Hal\Client\Event\AfterClientRequestedEvent;
 use Aeq\Hal\Event\EventingAware;
+use Aeq\Hal\Exception\InvalidResponseException;
 use Psr\Http\Message\ResponseInterface;
 
 trait ClientAdapterAware
@@ -19,11 +20,19 @@ trait ClientAdapterAware
      * @param string $uri
      * @param array $options
      * @return ResponseInterface
+     * @throws InvalidResponseException
      */
     public function request($method, $uri = null, array $options = [])
     {
         if ($this->clientAdapter instanceof ClientAdapterInterface) {
             $response = $this->clientAdapter->request($method, $uri, $options);
+
+            if ($response->getStatusCode() >= 400) {
+                throw new InvalidResponseException(
+                    sprintf('Status code "%s" for "%s"', $response->getStatusCode(), $uri),
+                    1474016330
+                );
+            }
 
             $this->triggerEvent(new AfterClientRequestedEvent($response));
 

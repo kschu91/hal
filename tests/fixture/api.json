@@ -4,6 +4,10 @@
         "self": {
             "href": "/api"
         },
+        "post": {
+            "href": "/api/posts/{id}",
+            "templated": true
+        },
         "posts": [
             {
                 "href": "/api/posts/1"

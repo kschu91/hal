@@ -1,6 +1,7 @@
 <?php
 namespace Aeq\Hal\Explorer;
 
+use Aeq\Hal\Exception\InvalidResourceException;
 use Aeq\Hal\Explorer;
 use Aeq\Hal\Explorer\Resource as HalResource;
 use Aeq\Hal\Utils\ArrayUtils;
@@ -11,9 +12,13 @@ class ResourceFactory
      * @param Explorer $explorer
      * @param array $data
      * @return HalResource|ResourceCollection
+     * @throws InvalidResourceException
      */
-    public static function create(Explorer $explorer, array $data)
+    public static function create(Explorer $explorer, $data)
     {
+        if (!is_array($data) || empty($data)) {
+            throw new InvalidResourceException('Give resource seems to be not valid. Resource is empty.', 1474016173);
+        }
         if (ArrayUtils::isNumericArray($data)) {
             return self::createCollection($explorer, $data);
         }

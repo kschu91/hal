@@ -86,4 +86,18 @@ class ExplorerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Kevin Schu', $data['_embedded']['posts'][0]['_embedded']['publisher']['name']);
         $this->assertSame('Kevin Schu', $data['_embedded']['posts'][1]['_embedded']['publisher']['name']);
     }
+
+    /**
+     * @param HalResource $resource
+     *
+     * @depends shouldExploreResponse
+     * @test
+     */
+    public function shouldFollowLinkWithTemplateUri(HalResource $resource)
+    {
+        $post = $resource->getLink('post')->follow(['id' => 2]);
+
+        $this->assertSame(2, $post->getData()['id']);
+        $this->assertSame('extremely awesome!', $post->getData()['name']);
+    }
 }

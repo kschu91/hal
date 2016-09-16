@@ -4,6 +4,7 @@ namespace Aeq\Hal\Explorer;
 use Aeq\Hal\Explorer;
 use Aeq\Hal\Explorer\Resource as HalResource;
 use Aeq\Hal\Exception\AlreadyEmbeddedException;
+use GuzzleHttp\UriTemplate;
 
 class Link implements LinkInterface
 {
@@ -55,7 +56,8 @@ class Link implements LinkInterface
                 1460663670
             );
         }
-        $resource = $this->request('GET', $this->data['href'], $variables, $options);
+
+        $resource = $this->request($variables, $options);
         $this->parent->addEmbedded($this->name, $resource);
         return $resource;
     }
@@ -69,24 +71,27 @@ class Link implements LinkInterface
     }
 
     /**
-     * @return string
+     * @param array $variables
+     * @param array $options
+     * @return HalResource|ResourceCollection
      */
-    public function getName()
+    private function request(array $variables = [], array $options = [])
     {
-        return $this->name;
+        $response = $this->explorer->request('GET', $this->getUri($variables), $options);
+        $resource = $this->explorer->explore($response);
+        return $resource;
     }
 
     /**
-     * @param string $method
-     * @param string $uri
      * @param array $variables
-     * @param array $options
-     * @return HalResource|\Aeq\Hal\Explorer\ResourceCollection
+     * @return string
      */
-    protected function request($method, $uri, array $variables = [], array $options = [])
+    private function getUri(array  $variables)
     {
-        $response = $this->explorer->request($method, $uri, $options);
-        $resource = $this->explorer->explore($response);
-        return $resource;
+        if (isset($this->data['templated']) && true === $this->data['templated']) {
+            $uri = new UriTemplate();
+            return $uri->expand($this->data['href'], $variables);
+        }
+        return $this->data['href'];
     }
 }
