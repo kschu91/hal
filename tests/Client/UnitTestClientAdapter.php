@@ -1,7 +1,8 @@
 <?php
 namespace Aeq\Hal\Client;
 
-use GuzzleHttp\Psr7\Response;
+use Aeq\Hal\Client\PSR7\Response;
+use Aeq\Hal\Client\PSR7\Stream;
 
 class UnitTestClientAdapter implements ClientAdapterInterface
 {
@@ -15,9 +16,14 @@ class UnitTestClientAdapter implements ClientAdapterInterface
     {
         $fixture = __DIR__ . '/../fixture/' . $uri . '.json';
         if (!file_exists($fixture)) {
-            return new Response(404);
+            $response = new Response();
+            $response->withStatus(404);
+            return $response;
         }
         $json = file_get_contents(__DIR__ . '/../fixture/' . $uri . '.json');
-        return new Response(200, [], $json);
+        $response = new Response();
+        $response->withStatus(200);
+        $response->withBody(new Stream($json));
+        return $response;
     }
 }

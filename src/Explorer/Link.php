@@ -4,7 +4,7 @@ namespace Aeq\Hal\Explorer;
 use Aeq\Hal\Explorer;
 use Aeq\Hal\Explorer\Resource as HalResource;
 use Aeq\Hal\Exception\AlreadyEmbeddedException;
-use GuzzleHttp\UriTemplate;
+use QL\UriTemplate\UriTemplate;
 
 class Link implements LinkInterface
 {
@@ -89,8 +89,8 @@ class Link implements LinkInterface
     private function getUri(array  $variables)
     {
         if (isset($this->data['templated']) && true === $this->data['templated']) {
-            $uri = new UriTemplate();
-            return $uri->expand($this->data['href'], $variables);
+            $uri = new UriTemplate($this->data['href']);
+            return $uri->expand($variables);
         }
         return $this->data['href'];
     }
