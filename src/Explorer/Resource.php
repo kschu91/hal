@@ -38,7 +38,7 @@ class Resource implements ResourceInterface, EmbeddableInterface
 
     /**
      * @param string $name
-     * @return \Aeq\Hal\Explorer\Link|\Aeq\Hal\Explorer\LinkCollection
+     * @return LinkInterface
      * @throws NotFoundException
      */
     public function getLink($name)
