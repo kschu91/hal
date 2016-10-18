@@ -1,7 +1,7 @@
 <?php
 namespace Aeq\Hal\Client;
 
-use Aeq\Hal\Client\Event\AfterClientRequestedEvent;
+use Aeq\Hal\Client\Event\PostClientRequestEvent;
 use Aeq\Hal\Event\EventingAware;
 use Aeq\Hal\Exception\InvalidResponseException;
 use Psr\Http\Message\ResponseInterface;
@@ -34,7 +34,7 @@ trait ClientAdapterAware
                 );
             }
 
-            $this->triggerEvent(new AfterClientRequestedEvent($response));
+            $this->triggerEvent(new PostClientRequestEvent($response));
 
             return $response;
         }

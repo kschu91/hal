@@ -4,7 +4,7 @@ namespace Aeq\Hal\Client\Event;
 use Aeq\Hal\Event\EventInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class AfterClientRequestedEvent implements EventInterface
+class PostClientRequestEvent implements EventInterface
 {
     /**
      * @var ResponseInterface
