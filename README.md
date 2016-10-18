@@ -1,6 +1,6 @@
 #PHP HAL (Hypertext Application Language) Explorer#
 
-This library provides a full featured API to discover a [HAL (Hypertext Application Language)](http://stateless.co/hal_specification.html) API via a expressive interface.
+This library provides a full featured API to discover a [HAL (Hypertext Application Language)](http://stateless.co/hal_specification.html) API via an expressive interface.
 
 ```php
 $posts = $resource->getLink('posts')->follow();
