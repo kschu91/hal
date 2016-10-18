@@ -118,5 +118,5 @@ class MyHandler
 ###PostClientRequestEvent###
 This event is called on each executed request (after following a link or using the "request" method) and contains the complete PSR-7 response.
 ```php
-$explorer->listenOnEvent(AfterClientRequestedEvent::class, new MyHandler());
+$explorer->listenOnEvent(PostClientRequestEvent::class, new MyHandler());
 ```
