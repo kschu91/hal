@@ -1,6 +1,6 @@
 #PHP HAL (Hypertext Application Language) Explorer#
 
-This library provides a full featured API to discover a [HAL (Hypertext Application Language)](http://stateless.co/hal_specification.html) API via an fluent interface.
+This library provides a full featured API to discover a [HAL (Hypertext Application Language)](http://stateless.co/hal_specification.html) API via a expressive interface.
 
 ```php
 $posts = $resource->getLink('posts')->follow();
@@ -8,11 +8,11 @@ $posts = $resource->getLink('posts')->follow();
 
 Features
 * GuzzleHttp as default HTTP Client
-* Easy integrate custom HTTP Clients
-* Chainable API for human friendly coding
+* integrate custom HTTP clients easily
+* human readable API
 * Shipped with a simple default serializer for JSON responses
 * Possibility to integrate custom serializers
-* Full tested
+* Fully tested
 * Used in production projects
 
 ##Usage##
@@ -42,8 +42,8 @@ foreach($posts as $post) {
     $company = $publisher->getLink('company')->follow();
 }
 ```
-After following links the resolved resource will be append as "_embedded" in the original "$resource" object.
-This allows you to get already followed links without resolving the link again:
+The result of following a link is that the resolved resource is appended to the parent „$resource“ object („_embedded“).
+This allows you to access the linked resource without resolving the link again:
 ```php
 $posts = $resource->getEmbedded('posts');
 foreach($posts as $post) {
@@ -103,7 +103,7 @@ This library offers you some events to listen on. To use the event system you ha
 $explorer->setEventManager(new EventManager());
 ```
 
-To listen on a specific event you have to implement a Listener. A Listener is a PHP object with an public method "handle".
+To listen on a specific event you have to implement a Listener. A Listener is a PHP object with a public method "handle".
 As parameter your will get the triggered Event object.
 
 ```php
@@ -115,8 +115,8 @@ class MyHandler
     }
 }
 ```
-###AfterClientRequestedEvent###
-This event is called after a request is done and contains the complete PSR-7 response.
+###PostClientRequestEvent###
+This event is called on each executed request (after following a link or using the "request" method) and contains the complete PSR-7 response.
 ```php
 $explorer->listenOnEvent(AfterClientRequestedEvent::class, new MyHandler());
 ```
