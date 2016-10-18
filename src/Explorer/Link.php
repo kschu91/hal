@@ -45,7 +45,7 @@ class Link implements LinkInterface
     /**
      * @param array $variables
      * @param array $options
-     * @return HalResource
+     * @return HalResource|ResourceCollection
      * @throws AlreadyEmbeddedException
      */
     public function follow(array $variables = [], array $options = [])
