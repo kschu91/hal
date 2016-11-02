@@ -25,7 +25,7 @@ Features
 ###1. Initiate the Explorer###
 ```php
 $explorer = new Explorer();
-$explorer->setClientAdapter(new GuzzleClientAdapter());
+$explorer->setClientAdapter(new GuzzleClientAdapter(new Client()));
 $explorer->setSerializer(new JsonSerializer());
 ```
 If you want to use the the build in "GuzzleClientAdapter" you have to require guzzlehttp/guzzle manually in your composer project since guzzle is only suggested.

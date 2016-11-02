@@ -1,14 +1,22 @@
 <?php
 namespace Aeq\Hal\Client;
 
-use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Client;
 
 class GuzzleClientAdapter implements ClientAdapterInterface
 {
     /**
-     * @var ClientInterface
+     * @var Client
      */
     private $guzzleClient;
+
+    /**
+     * @param Client $guzzleClient
+     */
+    public function __construct(Client $guzzleClient)
+    {
+        $this->guzzleClient = $guzzleClient;
+    }
 
     /**
      * @param string $method
