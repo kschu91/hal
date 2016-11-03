@@ -1,8 +1,8 @@
 #PHP HAL (Hypertext Application Language) Explorer#
 
-[![Build Status](https://travis-ci.org/kschu91/hal.svg?branch=master)](https://travis-ci.org/AOEpeople/TYPO3-varnish)
-[![Code Coverage](https://scrutinizer-ci.com/g/kschu91/hal/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/AOEpeople/TYPO3-varnish/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kschu91/hal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AOEpeople/TYPO3-varnish/?branch=master)
+[![Build Status](https://travis-ci.org/kschu91/hal.svg?branch=master)](https://travis-ci.org/kschu91/hal)
+[![Code Coverage](https://scrutinizer-ci.com/g/kschu91/hal/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/kschu91/hal/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kschu91/hal/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kschu91/hal/?branch=master)
 
 
 This library provides a full featured API to discover a [HAL (Hypertext Application Language)](http://stateless.co/hal_specification.html) API via an expressive interface.
