@@ -19,5 +19,9 @@
         "administrator": {
             "href": "/api/users/kevin"
         }
+    },
+    "_embedded": {
+        "employees": [
+        ]
     }
 }

@@ -16,8 +16,8 @@ class ResourceFactory
      */
     public static function create(Explorer $explorer, $data)
     {
-        if (!is_array($data) || empty($data)) {
-            throw new InvalidResourceException('Give resource seems to be not valid. Resource is empty.', 1474016173);
+        if (!is_array($data)) {
+            throw new InvalidResourceException('Given resource seems to be not valid. Resource is empty.', 1474016173);
         }
         if (ArrayUtils::isNumericArray($data)) {
             return self::createCollection($explorer, $data);

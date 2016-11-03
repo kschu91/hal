@@ -48,6 +48,18 @@ class ExplorerTest extends \PHPUnit_Framework_TestCase
      * @depends shouldExploreResponse
      * @test
      */
+    public function shouldExploreEmptyEmbedded(HalResource $resource)
+    {
+        $data = $resource->getEmbedded('employees')->getData();
+        $this->assertEmpty($data);
+    }
+
+    /**
+     * @param HalResource $resource
+     *
+     * @depends shouldExploreResponse
+     * @test
+     */
     public function shouldFollowLinkToResource(HalResource $resource)
     {
         $data = $resource->getLink('administrator')->follow()->getData();
