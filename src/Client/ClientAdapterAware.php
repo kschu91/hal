@@ -27,13 +27,6 @@ trait ClientAdapterAware
         if ($this->clientAdapter instanceof ClientAdapterInterface) {
             $response = $this->clientAdapter->request($method, $uri, $options);
 
-            if ($response->getStatusCode() >= 400) {
-                throw new InvalidResponseException(
-                    sprintf('Status code "%s" for "%s"', $response->getStatusCode(), $uri),
-                    1474016330
-                );
-            }
-
             $this->triggerEvent(new PostClientRequestEvent($response));
 
             return $response;
